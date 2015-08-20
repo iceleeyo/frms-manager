@@ -57,21 +57,21 @@
 			<!-- c3p0 pool config end -->
 			<!-- HikariCP pool config begin -->
 			<dataSource class="com.zaxxer.hikari.HikariDataSource">
-				<driverClassName>${portal.jdbc.driverClassName}</driverClassName>
-				<jdbcUrl>${portal.jdbc.jdbcUrl}</jdbcUrl>
-				<username>${portal.jdbc.username}</username>
-				<password>${portal.jdbc.password}</password>
+				<driverClassName>${manager.jdbc.driverClassName}</driverClassName>
+				<jdbcUrl>${manager.jdbc.jdbcUrl}</jdbcUrl>
+				<username>${manager.jdbc.username}</username>
+				<password>${manager.jdbc.password}</password>
 				<!-- 池中最大链接数量 -->
-				<maxPoolSize>${portal.jdbc.maximumPoolSize}</maxPoolSize>
+				<maxPoolSize>${manager.jdbc.maximumPoolSize}</maxPoolSize>
 				<!-- 池中最小空闲链接数量 -->
-				<minIdle>${portal.jdbc.minimumIdle}</minIdle>
+				<minIdle>${manager.jdbc.minimumIdle}</minIdle>
 				<!-- 连接池中一个连接的最大生命周期 default：30分钟 -->
-				<maxLifetime>${portal.jdbc.maxLifetime}</maxLifetime>
+				<maxLifetime>${manager.jdbc.maxLifetime}</maxLifetime>
 				<!-- 最大连接超时时间 default：30秒 -->
-				<connectionTimeout>${portal.jdbc.connectionTimeout}</connectionTimeout>
+				<connectionTimeout>${manager.jdbc.connectionTimeout}</connectionTimeout>
 				<!-- 最大空闲超时时间 default：10分钟   -->
-				<idleTimeout>${portal.jdbc.idleTimeout}</idleTimeout>
-				<connectionTestQuery>${portal.jdbc.connectionTestQuery}</connectionTestQuery>
+				<idleTimeout>${manager.jdbc.idleTimeout}</idleTimeout>
+				<connectionTestQuery>${manager.jdbc.connectionTestQuery}</connectionTestQuery>
 			</dataSource>
 			<!-- HikariCP pool config end -->
 		</connectionSource>
@@ -79,9 +79,8 @@
 		<filter class="cn.com.bsfit.frms.portal.base.log.LogDBFilter" />
 	</appender>
 
-	<logger name="cn.com.bsfit.frms.portal.base.mapper" level="INFO" />
-	<logger name="cn.com.bsfit.frms.ds.mapper" level="INFO" />
-
+	<logger name="cn.com.bsfit.frms.manager.mapper" level="INFO" />
+	
 	<!-- 根，所有logger的祖先 -->
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />

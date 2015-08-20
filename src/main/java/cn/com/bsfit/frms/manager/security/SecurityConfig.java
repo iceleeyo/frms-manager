@@ -34,8 +34,8 @@ public class SecurityConfig {
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		
 		@Autowired
-		@Qualifier("rulesDataSource")
-		private DataSource rulesDataSource;
+		@Qualifier("managerDataSource")
+		private DataSource managerDataSource;
 
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable().headers().disable().authorizeRequests().antMatchers(HttpMethod.HEAD, "/rs/**")
@@ -48,7 +48,7 @@ public class SecurityConfig {
 
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.jdbcAuthentication().dataSource(rulesDataSource).passwordEncoder(new ShaPasswordEncoder(256))
+			auth.jdbcAuthentication().dataSource(managerDataSource).passwordEncoder(new ShaPasswordEncoder(256))
 				.authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username=?")
 				.groupAuthoritiesByUsername("SELECT ga.group_name, ga.group_name, ga.authority FROM group_authorities ga " 
 						+ "INNER JOIN (SELECT username, group_name FROM users WHERE username=?) aga  ON (ga.group_name=aga.group_name)")
@@ -60,8 +60,8 @@ public class SecurityConfig {
 	public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
 		@Autowired
-		@Qualifier("rulesDataSource")
-		private DataSource rulesDataSource;
+		@Qualifier("managerDataSource")
+		private DataSource managerDataSource;
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
@@ -83,7 +83,7 @@ public class SecurityConfig {
 
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.jdbcAuthentication().dataSource(rulesDataSource).passwordEncoder(new ShaPasswordEncoder(256))
+			auth.jdbcAuthentication().dataSource(managerDataSource).passwordEncoder(new ShaPasswordEncoder(256))
 				.authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username=?")
 				.groupAuthoritiesByUsername("SELECT ga.group_name, ga.group_name, ga.authority FROM group_authorities ga " 
 						+ "INNER JOIN (SELECT username, group_name FROM users WHERE username=?) aga  ON (ga.group_name=aga.group_name)")
