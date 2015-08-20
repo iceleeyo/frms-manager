@@ -1,11 +1,11 @@
-package cn.com.bsfit.frms.portal.enums;
+package cn.com.bsfit.frms.manager.enums;
 
 /**
  * 数据库表中ENABLED状态枚举
  * 
  * @author hjp
  * 
- * @since 1.3.0
+ * @since 1.0.0
  *
  */
 public enum Status {

@@ -1,10 +1,9 @@
-package cn.com.bsfit.frms.portal.service;
+package cn.com.bsfit.frms.manager.service;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.Attributes;
@@ -58,7 +57,6 @@ public class AboutServerResource {
             map.put("title", title);
             map.put("build", build);
             map.put("version", version);
-            map.put("year", Calendar.YEAR);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

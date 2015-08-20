@@ -1,29 +1,31 @@
-package cn.com.bsfit.frms.portal.enums;
+package cn.com.bsfit.frms.manager.enums;
 
 /**
- * 菜单类型
+ * 菜单打开方式枚举
  * 
  * @author hjp
  * 
- * @since 1.3.0
+ * @since 1.0.0
  *
  */
-public enum MenuType {
+public enum OpenType {
 	
-	NOTMENU(0, "非菜单"), ISMENU(1, "是菜单");
-	private Integer index;
+	OLDWINOPEN((short) 0, "原窗口打开"),
+	NEWWINOPEN((short) 1, "新窗口打开");
+	
+	private Short index;
 	private String name;
 	
-	private MenuType(Integer index, String name) {
+	private OpenType(Short index, String name) {
 		this.index = index;
 		this.name = name;
 	}
 
-	public Integer getIndex() {
+	public Short getIndex() {
 		return index;
 	}
 
-	public void setIndex(Integer index) {
+	public void setIndex(Short index) {
 		this.index = index;
 	}
 
@@ -34,9 +36,9 @@ public enum MenuType {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public static String getNameByIndex(Short index) {
-		for(MenuType type : MenuType.values()) {
+		for(OpenType type : OpenType.values()) {
 			if (type.getIndex().equals(index)) {
 				return type.getName();
 			}

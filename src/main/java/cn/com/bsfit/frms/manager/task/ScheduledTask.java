@@ -1,4 +1,4 @@
-package cn.com.bsfit.frms.portal.task;
+package cn.com.bsfit.frms.manager.task;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
