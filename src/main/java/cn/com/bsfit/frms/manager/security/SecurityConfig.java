@@ -16,6 +16,7 @@ import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher
 
 import cn.com.bsfit.frms.manager.auth.AjaxPostFailureHandler;
 import cn.com.bsfit.frms.manager.auth.AjaxPostSuccHandler;
+import cn.com.bsfit.frms.manager.utils.Constants;
 
 /**
  * Spring Security配置
@@ -28,31 +29,28 @@ import cn.com.bsfit.frms.manager.auth.AjaxPostSuccHandler;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	
+
 	@Configuration
 	@Order(1)
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-		
+
 		@Autowired
 		@Qualifier("managerDataSource")
 		private DataSource managerDataSource;
 
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable().headers().disable().authorizeRequests().antMatchers(HttpMethod.HEAD, "/rs/**")
-				.permitAll().antMatchers("/rs/**", "/", "/index.html").authenticated().and()
-				.requestMatcher(new RequestHeaderRequestMatcher("User-Agent", "java")).httpBasic()
-				.realmName("frms-manager").and().logout()
-				.logoutUrl("/j_spring_security_logout")
-				.logoutSuccessUrl("/login.html");
+					.permitAll().antMatchers("/rs/**", "/", "/index.html").authenticated().and()
+					.requestMatcher(new RequestHeaderRequestMatcher("User-Agent", "java")).httpBasic()
+					.realmName("frms-manager").and().logout().logoutUrl("/j_spring_security_logout")
+					.logoutSuccessUrl("/login.html");
 		}
 
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
 			auth.jdbcAuthentication().dataSource(managerDataSource).passwordEncoder(new ShaPasswordEncoder(256))
-				.authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username=?")
-				.groupAuthoritiesByUsername("SELECT ga.group_name, ga.group_name, ga.authority FROM group_authorities ga " 
-						+ "INNER JOIN (SELECT username, group_name FROM users WHERE username=?) aga  ON (ga.group_name=aga.group_name)")
-				.usersByUsernameQuery("select USERNAME, PASSWORD, ENABLED  from USERS where USERNAME = ?");
+					.authoritiesByUsernameQuery(Constants.USER_BY_NAME_QUERY)
+					.usersByUsernameQuery(Constants.AUTHORITIES_BY_NAME_QUERY);
 		}
 	}
 
@@ -67,27 +65,19 @@ public class SecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			AjaxPostSuccHandler succHandler = new AjaxPostSuccHandler();
 			succHandler.setDefaultTargetUrl("/index.html");
-			http.csrf().disable().headers().disable().authorizeRequests()
-					.antMatchers(HttpMethod.HEAD, "/rs/**").permitAll()
-					.antMatchers("/rs/**", "/", "/index.html").authenticated()
-					.and().formLogin().loginPage("/login.html")
-					.usernameParameter("j_username")
-					.passwordParameter("j_password")
-					.loginProcessingUrl("/j_spring_security_check")
-					.defaultSuccessUrl("/index.html")
-					.failureHandler(new AjaxPostFailureHandler())
-					.successHandler(succHandler).permitAll().and().logout()
-					.logoutUrl("/j_spring_security_logout")
-					.logoutSuccessUrl("/login.html").permitAll();
+			http.csrf().disable().headers().disable().authorizeRequests().antMatchers(HttpMethod.HEAD, "/rs/**")
+					.permitAll().antMatchers("/rs/**", "/", "/index.html").authenticated().and().formLogin()
+					.loginPage("/login.html").usernameParameter("j_username").passwordParameter("j_password")
+					.loginProcessingUrl("/j_spring_security_check").defaultSuccessUrl("/index.html")
+					.failureHandler(new AjaxPostFailureHandler()).successHandler(succHandler).permitAll().and().logout()
+					.logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login.html").permitAll();
 		}
 
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
 			auth.jdbcAuthentication().dataSource(managerDataSource).passwordEncoder(new ShaPasswordEncoder(256))
-				.authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username=?")
-				.groupAuthoritiesByUsername("SELECT ga.group_name, ga.group_name, ga.authority FROM group_authorities ga " 
-						+ "INNER JOIN (SELECT username, group_name FROM users WHERE username=?) aga  ON (ga.group_name=aga.group_name)")
-				.usersByUsernameQuery("select USERNAME, PASSWORD, ENABLED  from USERS where USERNAME = ?");
+					.authoritiesByUsernameQuery(Constants.USER_BY_NAME_QUERY)
+					.usersByUsernameQuery(Constants.AUTHORITIES_BY_NAME_QUERY);
 		}
 	}
 }
