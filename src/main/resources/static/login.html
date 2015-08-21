@@ -10,67 +10,40 @@
 	<script type="text/javascript" src="jquery-easyui-1.4.3/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/css/login.css" />
+	<script type="text/javascript" src="login.js"></script>
 </head>
 <body>
-	<div class="box">
-		<div class="login-box">
-			<div class="login-title text-center">
-				<h1>
-					<small>考勤管理系统-用户登录</small>
-				</h1>
-			</div>
-			<div class="login-content ">
-				<div class="form">
-					<form action="#" method="post">
-						<div class="form-group">
-							<div class="col-xs-12  ">
-								<div class="input-group">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-user"></span></span> <input type="text"
-										id="username" name="username" class="form-control"
-										placeholder="用户名">
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-12  ">
-								<div class="input-group">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-lock"></span></span> <input type="text"
-										id="password" name="password" class="form-control"
-										placeholder="密码">
-								</div>
-							</div>
-						</div>
-						<div class="form-group form-actions">
-							<div class="col-xs-4 col-xs-offset-4 ">
-								<button type="submit" class="btn btn-sm btn-info">
-									<span class="glyphicon glyphicon-off"></span> 登录
-								</button>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6 link">
-								<p class="text-center remove-margin">
-									<small>忘记密码？</small> <a href="javascript:void(0)"><small>找回</small></a>
-								</p>
-							</div>
-							<div class="col-xs-6 link">
-								<p class="text-center remove-margin">
-									<small>还没注册?</small> <a href="javascript:void(0)"><small>注册</small></a>
-								</p>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
+	<div class="top_div"></div>
+	<div class="login_main">
+		<div class="login_title">
+			<div class="tou"></div>
+			<div class="initial_left_hand" id="left_hand"></div>
+			<div class="initial_right_hand" id="right_hand"></div>
 		</div>
+		<form id="login_form" action="j_spring_security_check" method="post">
+			<p class="login_ipt">
+				<span class="u_logo"></span>
+				<input class="ipt" type="text" name="j_username" placeholder="请输入用户名" value="">
+			</p>
+			<p class="login_pwd">
+				<span class="p_logo"></span>
+				<input class="ipt" id="password" type="password" name="j_password" placeholder="请输入密码" value="">
+			</p>
+			<div class="login_footer">
+				<p class="login_footer_p">
+					<span class="login_forget_pwd_span">
+						<a class="login_forget_pwd" href="#">忘记密码?</a>
+					</span>
+					<span class="login_btn_p">
+						<a class="login_register" href="#">注册</a>
+						<input type="submit" class="login_btn" id="login_btn" value="登录" />
+					</span>
+				</p>
+			</div>
+		</form>
 	</div>
-
-	<div style="text-align:center;" class="footer">
-		<p>
-			Copyright © 2010-2015 www.bsfit.com.cn All Rights Reserved 版权所有  杭州邦盛金融信息技术有限公司
-		</p>
+	<div class="footer">
+		<p>Copyright © 2010-2015 www.bsfit.com.cn All Rights Reserved 版权所有 杭州邦盛金融信息技术有限公司</p>
 	</div>
 </body>
 </html>
