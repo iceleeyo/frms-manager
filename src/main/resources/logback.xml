@@ -43,18 +43,8 @@
 	</appender>
 
 	<!-- 过滤"toDB-"为首的消息 -->
-	<appender name="SAVE2DB" class="cn.com.bsfit.frms.portal.base.log.LogDBAppender">
+	<appender name="SAVE2DB" class="cn.com.bsfit.frms.manager.log.LogDBAppender">
 		<connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
-			<!-- c3p0 pool config begin -->
-			<!--  
-			<dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-				<driverClass>${portal.jdbc.driverClassName}</driverClass> 
-				<jdbcUrl>${portal.jdbc.jdbcUrl}</jdbcUrl> 
-				<user>${portal.jdbc.username}</user>
-				<password>${portal.jdbc.password}</password>
-			</dataSource>
-			-->
-			<!-- c3p0 pool config end -->
 			<!-- HikariCP pool config begin -->
 			<dataSource class="com.zaxxer.hikari.HikariDataSource">
 				<driverClassName>${manager.jdbc.driverClassName}</driverClassName>
@@ -76,7 +66,7 @@
 			<!-- HikariCP pool config end -->
 		</connectionSource>
 		<!-- 过滤包含"toDB-"的消息 -->
-		<filter class="cn.com.bsfit.frms.portal.base.log.LogDBFilter" />
+		<filter class="cn.com.bsfit.frms.manager.log.LogDBFilter" />
 	</appender>
 
 	<logger name="cn.com.bsfit.frms.manager.mapper" level="INFO" />

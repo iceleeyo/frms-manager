@@ -41,7 +41,7 @@ public class SecurityConfig {
 			http.csrf().disable().headers().disable().authorizeRequests().antMatchers(HttpMethod.HEAD, "/rs/**")
 				.permitAll().antMatchers("/rs/**", "/", "/index.html").authenticated().and()
 				.requestMatcher(new RequestHeaderRequestMatcher("User-Agent", "java")).httpBasic()
-				.realmName("frms-rules").and().logout()
+				.realmName("frms-manager").and().logout()
 				.logoutUrl("/j_spring_security_logout")
 				.logoutSuccessUrl("/login.html");
 		}

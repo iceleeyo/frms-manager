@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.com.bsfit.frms.manager.utils.BaseServerResource;
+
 /**
  * 系统版本信息
  * 
@@ -24,8 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/about")
-public class AboutServerResource {
+@RequestMapping("/rs/about")
+public class AboutServerResource extends BaseServerResource {
 
 	private Logger logger = LoggerFactory.getLogger(AboutServerResource.class);
 	
